@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZFuel Form</title>
+</head>
+<body>
+    <form action="results.html" method="GET" enctype="multipart/form-data">
+        <div>
+            <label for="courseDistance">Course Distance (km)</label>
+            <input type="number" id="courseDistance" name="courseDistance" required>
+        </div>
+        <div>
+            <label for="courseClimb">Course Climb (m)</label>
+            <input type="number" id="courseClimb" name="courseClimb" required>
+        </div>
+
+        <div>
+            <label for="weight">Weight</label>
+            <input type="number" id="weight" name="weight" value="75" required>
+        </div>
+        <div>
+            <label for="goalWatts">Goal Watts per Kg</label>
+            <input type="number" id="goalWatts" name="goalWatts" value="2" required>
+        </div>
+        <div>
+            <input type="submit" value="Submit">
+        </div>
+    </form>
+    
+</body>
+</html>

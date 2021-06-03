@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Results</title>
+</head>
+<body>
+    <div id="results"></div>
+
+    <script>
+        const resultsList = document.getElementById('results')
+        new URLSearchParams(window.location.search).forEach((value, name) => {
+            resultsList.append(`${name}: ${value}`)
+            resultsList.append(document.createElement('br'))
+        })
+
+console.log(window.location.search);
+        const queryString = window.location.search;
+        const URLParams = new URLSearchParams(queryString);
+
+        let courseDistance = URLParams.get('courseDistance');
+        let courseClimb = URLParams.get('courseClimb');
+        let weight = URLParams.get('weight');
+        let goalWatts = URLParams.get('goalWatts');     
+
+console.log(courseDistance);
+
+<!---These coefficients are being picked up correctly-->
+        const interceptCoefficient = 0.33075815;
+        const distanceCoefficient = 0.02318787;
+        const climbCoefficient = 0.000772;
+        const weightCoefficient = -0.00344925;
+        const wattsCoefficient = -0.03204521;
+
+        const predictedFinishTime = (interceptCoefficient + distanceCoefficient * courseDistance + climbCoefficient * courseClimb + weightCoefficient * weight + wattsCoefficient * goalWatts) / 24;
+        document.write(predictedFinishTime);
+        document.write("<br>");
+
+        var decimalTimeString = predictedFinishTime;
+        var n = new Date(0,0);
+        n.setSeconds(+decimalTimeString * 60 * 60);
+        n.setMinutes(+decimalTimeString * 60); 
+        var result = n.toTimeString().slice(0, 5);
+        document.write(result);
+
+        <!---Have commented out this conversion to time until i can get the formula to work-->
+        var decimalTimeString = predictedFinishTime;
+        var n = new Date(0,0);
+        n.setSeconds(+decimalTimeString * 60 * 60);
+        document.write(n.toTimeString().slice(0, 8));
+        document.write("<br>");
+
+        function minTommss(predictedFinishTime){
+            var sign = minutes < 0 ? "-" : "";
+            var min = Math.floor(Math.abs(minutes));
+            var sec = Math.floor((Math.abs(minutes) * 60) % 60);
+            return sign + (min < 10 ? "0" : "") + min + ":" + (sec < 10 ? "0" : "") + sec;
+        }
+        document.write(minTommss);
+        document.write("<br>");
+
+        <!---Document write shows me that these variables are 'null'-->
+        /*document.write(courseDistance);
+        document.write(courseClimb);
+        document.write(weight);
+        document.write(goalWatts);*/
+
+        <!---Document write shows me that these variables are working-->
+        /*document.write(interceptCoefficient);
+        document.write(distanceCoefficient);
+        document.write(climbCoefficient);
+        document.write(weightCoefficient);
+        document.write(wattsCoefficient);*/
+        
+    </script>
+    <div>
+
+    </div>
+    <button type="button" onclick="javascript:history.back()">Back</button>
+    
+</body>
+</html>
