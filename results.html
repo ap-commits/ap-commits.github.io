@@ -4,17 +4,18 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
     <title>Results</title>
 </head>
 <body>
     <div id="results"></div>
 
     <script>
-        const resultsList = document.getElementById('results')
+        /*const resultsList = document.getElementById('results')
         new URLSearchParams(window.location.search).forEach((value, name) => {
             resultsList.append(`${name}: ${value}`)
             resultsList.append(document.createElement('br'))
-        })
+        })*/
 
 console.log(window.location.search);
         const queryString = window.location.search;
@@ -25,7 +26,6 @@ console.log(window.location.search);
         let weight = URLParams.get('weight');
         let goalWatts = URLParams.get('goalWatts');     
 
-console.log(courseDistance);
 
 <!---These coefficients are being picked up correctly-->
         const interceptCoefficient = 0.33075815;
@@ -35,50 +35,39 @@ console.log(courseDistance);
         const wattsCoefficient = -0.03204521;
 
         const predictedFinishTime = (interceptCoefficient + distanceCoefficient * courseDistance + climbCoefficient * courseClimb + weightCoefficient * weight + wattsCoefficient * goalWatts) / 24;
-        document.write(predictedFinishTime);
-        document.write("<br>");
 
-        var decimalTimeString = predictedFinishTime;
-        var n = new Date(0,0);
-        n.setSeconds(+decimalTimeString * 60 * 60);
-        n.setMinutes(+decimalTimeString * 60); 
-        var result = n.toTimeString().slice(0, 5);
-        document.write(result);
+        const totalSecondsInADay = 86400;
+        const totalSecondsFinishTime = predictedFinishTime * totalSecondsInADay;
 
-        <!---Have commented out this conversion to time until i can get the formula to work-->
-        var decimalTimeString = predictedFinishTime;
-        var n = new Date(0,0);
-        n.setSeconds(+decimalTimeString * 60 * 60);
-        document.write(n.toTimeString().slice(0, 8));
-        document.write("<br>");
-
-        function minTommss(predictedFinishTime){
-            var sign = minutes < 0 ? "-" : "";
-            var min = Math.floor(Math.abs(minutes));
-            var sec = Math.floor((Math.abs(minutes) * 60) % 60);
-            return sign + (min < 10 ? "0" : "") + min + ":" + (sec < 10 ? "0" : "") + sec;
+        function time_convert(num){ 
+        const hours = Math.floor(num / 60 / 60);  
+        const minutes = Math.floor((num / 60) - (hours * 60));
+        const seconds = Math.floor(num % 60);
+        return `${(hours < 10 ? '0' : '') + hours}:${(minutes < 10 ? '0' : '') + minutes}:${(seconds < 10 ? '0' : '') + seconds}`;
         }
-        document.write(minTommss);
-        document.write("<br>");
+        const totalTime = (time_convert(totalSecondsFinishTime));
+        console.log(totalTime);
 
-        <!---Document write shows me that these variables are 'null'-->
-        /*document.write(courseDistance);
-        document.write(courseClimb);
-        document.write(weight);
-        document.write(goalWatts);*/
-
-        <!---Document write shows me that these variables are working-->
-        /*document.write(interceptCoefficient);
-        document.write(distanceCoefficient);
-        document.write(climbCoefficient);
-        document.write(weightCoefficient);
-        document.write(wattsCoefficient);*/
+        const caloriesBurned = Math.floor((goalWatts * weight)*(predictedFinishTime*24)*3.6);
         
-    </script>
-    <div>
+        document.write(`For a ride of ${courseDistance}km`);
+        document.write("<br>");
+        document.write(`With ${courseClimb}m of climbing`);
+        document.write("<br>");
+        document.write(`If your weight is ${weight}kgs`);
+        document.write("<br>");
+        document.write(`And you push ${goalWatts}w/kg`);
+        document.write("<br>");
+        document.write(`It will take you: ${totalTime}`);
+        document.write("<br>");
+        document.write(`Estimated calories burned is: ${caloriesBurned}`);
+        document.write("<br>");
+        
 
-    </div>
+    </script>
+
+    <div>
     <button type="button" onclick="javascript:history.back()">Back</button>
-    
+    </div>
 </body>
 </html>
