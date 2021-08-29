@@ -1,5 +1,5 @@
 body {
-  background-image: url("https://blog.mapmyrun.com/wp-content/uploads/2019/04/4-Alternatives-to-Gels-For-Hard-Riding-Fuel-752x472.jpg");
+  background-color: #eeebeb;
   background-repeat: no-repeat;
   font-family: Helvetica;
   font-size: 30px;
@@ -22,7 +22,7 @@ form {
     overflow: auto;
   }
 
-#courseDistance, #courseClimb, #weight, #goalWatts {
+#courseDistance, #courseClimb, #weight, #goalWatts, #world, #results {
     vertical-align: middle;
     font-size: 30px;
   }
@@ -30,7 +30,7 @@ form {
 
   @media only screen and (max-width: 480px) {
     body {
-      font-size: 30px;
+      font-size: 2rem;
     }
     
     #form {
